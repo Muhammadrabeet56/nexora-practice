@@ -1,21 +1,14 @@
 name: tests
-
 on:
-  push:
-    branches: [main]
+  push: { branches: [main] }
   pull_request:
-
 jobs:
-  test:
+  server-tests:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-      - name: Install test deps
-        run: pip install pytest
-      - name: Run day-001 tests
-        run: |
-          cd day-001
-          python -m pytest tests/ -v
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - run: cd server && npm ci
+      - run: cd server && npm test
+        env: { MONGO_URL: "mongodb://localhost:27017/nexora-pos-test" }

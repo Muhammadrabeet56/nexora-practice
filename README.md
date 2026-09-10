@@ -1,20 +1,34 @@
-# Nexora Engineering Practice
+# NexoraPOS — Point of Sale & ERP System (MERN)
 
-Daily coding exercises by Muhammad Rabeet — following Google's engineering
-practices (design docs, code review standards, style guides, tests-with-code).
+A production-grade POS sales ERP built the Google way: design docs first,
+tests with code, small reviewable commits, CI on every push.
 
-## Method (per Google's eng-practices)
-1. DESIGN.md first — objective, goals/non-goals, decisions, alternatives
-2. Small focused commits with descriptive messages
-3. Tests written WITH the code
-4. README per day: what was learned and applied
+## Stack
+MongoDB 8 · Express 5 · React 19 · Node 22
 
-## Curriculum
-Phase 1 (weeks 1-2): google/eng-practices + styleguide + googletest patterns
-Phase 2 (weeks 3-4): project structure, CI, apply standards to real code
-Phase 3 (weeks 5+): deeper CS — algorithms, system design, AI engineering
+## Modules
+- **Products & Inventory** — catalog, stock levels, low-stock alerts
+- **Sales / POS terminal** — fast cart, checkout, receipts
+- **Accounts & Accountability** — every stock movement and sale is audited,
+  attributed to a user, and reversible via returns
+- **Dashboard & Reports** — revenue, top products, stock valuation
+- **Users & Roles** — admin / manager / cashier with least-privilege access
 
-## Day index
-| Day | Topic | Status |
-|-----|-------|--------|
-| 001 | Scheduler core: design doc + atomic booking + tests | ✅ |
+## Repo layout
+```
+server/          Express API + Mongo models + tests
+web/             React frontend (Vite)
+docs/            DESIGN.md, API.md, data model, day-by-day log
+.github/         CI: server tests on every push
+```
+
+## Development
+```bash
+# server
+cd server && npm i && npm run dev     # :4000
+# web
+cd web && npm i && npm run dev        # :5173
+```
+
+## Build log
+See docs/LOG.md — every day documented: what, why, decisions, review notes.

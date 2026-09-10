@@ -1,9 +1,0 @@
-[project]
-name = "day-001-scheduler"
-version = "0.1.0"
-description = "Nexora practice day 001 — appointment scheduler core"
-requires-python = ">=3.10"
-dependencies = ["pytest>=7"]
-
-[tool.pytest.ini_options]
-testpaths = ["tests"]

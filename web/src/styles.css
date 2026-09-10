@@ -1,0 +1,105 @@
+/* NexoraPOS — clean dark enterprise theme */
+:root {
+  --bg: #0f1420; --panel: #171e2e; --panel2: #1e2740;
+  --line: #2a3550; --text: #e8ecf4; --muted: #8b96ad;
+  --accent: #4f8cff; --ok: #34c98e; --bad: #ff5d6c; --warn: #ffb020;
+  --radius: 10px;
+}
+* { box-sizing: border-box; margin: 0; }
+body {
+  font: 15px/1.5 -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: var(--bg); color: var(--text);
+}
+a { color: var(--accent); text-decoration: none; }
+h1 { font-size: 22px; margin-bottom: 12px; }
+h2 { font-size: 15px; margin-bottom: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; }
+.muted { color: var(--muted); }
+
+/* layout */
+.shell { display: grid; grid-template-columns: 210px 1fr; min-height: 100vh; }
+.sidebar {
+  background: var(--panel); border-right: 1px solid var(--line);
+  padding: 18px 14px; display: flex; flex-direction: column;
+}
+.brand { font-weight: 800; font-size: 17px; margin-bottom: 22px; }
+.sidebar nav { display: flex; flex-direction: column; gap: 4px; flex: 1; }
+.sidebar nav a {
+  padding: 9px 12px; border-radius: 8px; color: var(--text); font-weight: 500;
+}
+.sidebar nav a.active { background: var(--accent); color: #fff; }
+.sidebar-foot { border-top: 1px solid var(--line); padding-top: 12px; }
+.who { font-size: 13px; margin-bottom: 8px; }
+.role { font-size: 11px; padding: 2px 8px; border-radius: 99px; margin-left: 6px; text-transform: uppercase; }
+.role-admin { background: #7c3aed33; color: #b78aff; }
+.role-manager { background: #4f8cff33; color: #7fb0ff; }
+.role-cashier { background: #34c98e33; color: #6fe0b0; }
+.content { padding: 26px 30px; max-width: 1200px; }
+
+/* cards, tables, forms */
+.card {
+  background: var(--panel); border: 1px solid var(--line);
+  border-radius: var(--radius); padding: 18px; margin-bottom: 16px;
+}
+table { width: 100%; border-collapse: collapse; font-size: 14px; }
+th { text-align: left; color: var(--muted); font-size: 12px; padding: 8px 10px; border-bottom: 1px solid var(--line); }
+td { padding: 9px 10px; border-bottom: 1px solid var(--line); }
+tr:last-child td { border-bottom: 0; }
+.row-low { background: #ffb02011; }
+.row-muted { opacity: .5; }
+.bad { color: var(--bad); font-weight: 700; }
+
+input, select, button {
+  font: inherit; background: var(--panel2); color: var(--text);
+  border: 1px solid var(--line); border-radius: 8px; padding: 9px 12px;
+}
+input:focus, select:focus { outline: 2px solid var(--accent); border-color: transparent; }
+button { cursor: pointer; font-weight: 600; background: var(--accent); border: 0; }
+button:hover { filter: brightness(1.12); }
+button:disabled { opacity: .45; cursor: not-allowed; }
+button.ghost { background: transparent; border: 1px solid var(--line); }
+button.mini { padding: 4px 9px; font-size: 12px; margin-right: 3px; }
+button.danger { background: var(--bad); }
+button.big { width: 100%; padding: 13px; font-size: 16px; }
+
+.form-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; }
+.form-grid h2, .form-grid .alert, .form-grid .row { grid-column: 1 / -1; }
+.row { display: flex; gap: 8px; }
+
+.toolbar { display: flex; gap: 10px; margin-bottom: 12px; align-items: center; }
+.toolbar input { min-width: 260px; }
+.check { display: flex; gap: 6px; align-items: center; color: var(--muted); }
+
+.alert { padding: 10px 12px; border-radius: 8px; margin-bottom: 10px; font-size: 14px; }
+.alert.error { background: #ff5d6c22; color: #ff8a95; }
+.alert.ok { background: #34c98e22; color: #6fe0b0; }
+
+/* stats */
+.stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; margin-bottom: 18px; }
+.stat { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; }
+.stat span { display: block; color: var(--muted); font-size: 12px; margin-bottom: 6px; }
+.stat b { font-size: 24px; }
+
+/* login */
+.login-wrap { min-height: 100vh; display: grid; place-items: center; background: var(--bg); }
+.login-card { width: 340px; display: flex; flex-direction: column; gap: 12px; }
+.login-card h1 { margin: 0; }
+.login-card label { display: flex; flex-direction: column; gap: 6px; font-size: 13px; color: var(--muted); }
+
+/* POS */
+.pos-grid { display: grid; grid-template-columns: 1fr 380px; gap: 20px; align-items: start; }
+.pos-search { width: 100%; margin-bottom: 12px; }
+.pos-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 10px; }
+.pos-item {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 4px;
+  padding: 12px; text-align: left;
+}
+.pos-item .price { font-size: 16px; font-weight: 800; }
+.pos-cart { position: sticky; top: 20px; }
+.cart-line { display: grid; grid-template-columns: 1fr 60px 70px 30px; gap: 8px; align-items: center; margin-bottom: 8px; }
+.cart-line input { padding: 5px 8px; }
+.totals { border-top: 1px solid var(--line); margin-top: 10px; padding-top: 10px; display: flex; flex-direction: column; gap: 6px; }
+.totals .grand { font-size: 19px; font-weight: 800; }
+.pay { border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; cursor: pointer; flex: 1; text-align: center; background: var(--panel2); }
+.pay.on { border-color: var(--accent); color: var(--accent); }
+.pay input { display: none; }
+.pos-receipt { max-width: 460px; margin: 0 auto; }
