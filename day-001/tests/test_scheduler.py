@@ -40,3 +40,30 @@ class TestScheduler:
         assert keys == sorted(keys)                      # chronological
         assert "2026-09-11T09:30" not in keys            # booked one excluded
         assert "2026-09-11T09:00" in keys                # first of the day present
+
+
+class TestCancel:
+    def test_cancel_booked_slot_frees_it(self):
+        s = Scheduler()
+        slot = make_slot()
+        s.book(slot)
+        assert s.cancel(slot) is True
+        assert s.is_free(slot)
+
+    def test_cancel_never_booked_slot_fails(self):
+        s = Scheduler()
+        assert s.cancel(make_slot()) is False
+
+    def test_cancel_twice_fails_second_time(self):
+        s = Scheduler()
+        slot = make_slot()
+        s.book(slot)
+        s.cancel(slot)
+        assert s.cancel(slot) is False
+
+    def test_cancel_then_rebook_works(self):
+        s = Scheduler()
+        slot = make_slot()
+        s.book(slot)
+        s.cancel(slot)
+        assert s.book(slot) is True

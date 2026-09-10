@@ -40,6 +40,16 @@ class Scheduler:
         self._booked.add(key)
         return True
 
+    def cancel(self, slot: Slot) -> bool:
+        """Cancel a booked slot. Returns False (and changes nothing) if not booked.
+
+        Symmetric with book(): single-set operation, therefore atomic.
+        """
+        if slot.key() in self._booked:
+            self._booked.remove(slot.key())
+            return True
+        return False
+
     def is_free(self, slot: Slot) -> bool:
         """True if the slot can still be booked."""
         return slot.key() not in self._booked

@@ -1,14 +1,20 @@
-# Nexora Engineering Practice — Learning Exercises
-Daily coding exercises following Google's engineering standards. Each day = one focused exercise.
+# Nexora Engineering Practice
 
-## Rules (CEO-approved workflow)
-1. One exercise per day, committed to GitHub
-2. Apply what was learned that morning (from engineering-curriculum.md)
-3. Every commit follows Google's code review standards: small, focused, well-described
-4. Tests first or with the code — never without
-5. README updated daily with progress
+Daily coding exercises by Muhammad Rabeet — following Google's engineering
+practices (design docs, code review standards, style guides, tests-with-code).
 
-## Exercise Log
-| Day | Exercise | Topic Applied | Status |
-|-----|----------|---------------|--------|
-| 001 | 2026-09-11 | google/eng-practices code review + repo structure | in-progress |
+## Method (per Google's eng-practices)
+1. DESIGN.md first — objective, goals/non-goals, decisions, alternatives
+2. Small focused commits with descriptive messages
+3. Tests written WITH the code
+4. README per day: what was learned and applied
+
+## Curriculum
+Phase 1 (weeks 1-2): google/eng-practices + styleguide + googletest patterns
+Phase 2 (weeks 3-4): project structure, CI, apply standards to real code
+Phase 3 (weeks 5+): deeper CS — algorithms, system design, AI engineering
+
+## Day index
+| Day | Topic | Status |
+|-----|-------|--------|
+| 001 | Scheduler core: design doc + atomic booking + tests | ✅ |
