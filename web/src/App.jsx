@@ -7,6 +7,7 @@ import Dashboard from './pages/Dashboard.jsx';
 import Products from './pages/Products.jsx';
 import NewSale from './pages/NewSale.jsx';
 import Sales from './pages/Sales.jsx';
+import StockLedger from './pages/StockLedger.jsx';
 import Users from './pages/Users.jsx';
 
 function Guard({ roles, children }) {
@@ -26,6 +27,7 @@ export default function App() {
         <Route path="/products" element={<Guard><Products /></Guard>} />
         <Route path="/pos" element={<Guard><NewSale /></Guard>} />
         <Route path="/sales" element={<Guard roles={['admin','manager']}><Sales /></Guard>} />
+        <Route path="/ledger" element={<Guard roles={['admin','manager']}><StockLedger /></Guard>} />
         <Route path="/users" element={<Guard roles={['admin']}><Users /></Guard>} />
       </Route>
       <Route path="*" element={<Navigate to="/" replace />} />

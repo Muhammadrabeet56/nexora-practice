@@ -3,6 +3,7 @@ import cors from 'cors';
 import productRoutes from './routes/products.js';
 import saleRoutes from './routes/sales.js';
 import dashboardRoutes from './routes/dashboard.js';
+import stockMovementRoutes from './routes/stockMovements.js';
 import authRoutes from './routes/auth.js';
 
 export function createApp() {
@@ -14,6 +15,7 @@ export function createApp() {
   app.use('/api/products', productRoutes);
 app.use('/api/sales', saleRoutes);
 app.use('/api/dashboard', dashboardRoutes);
+app.use('/api/stock-movements', stockMovementRoutes);
   // central error handler — keeps stack traces out of responses
   app.use((err, _req, res, _next) => {
     console.error(err);

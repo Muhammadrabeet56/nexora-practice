@@ -7,6 +7,7 @@ const links = [
   { to: '/products', label: 'Products' },
   { to: '/pos', label: 'New Sale' },
   { to: '/sales', label: 'Sales', roles: ['admin', 'manager'] },
+  { to: '/ledger', label: 'Stock Ledger', roles: ['admin', 'manager'] },
   { to: '/users', label: 'Users', roles: ['admin'] },
 ];
 

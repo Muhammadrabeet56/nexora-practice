@@ -1,34 +1,54 @@
-# NexoraPOS — Point of Sale & ERP System (MERN)
+# NexoraPOS — Point of Sale / ERP
 
-A production-grade POS sales ERP built the Google way: design docs first,
-tests with code, small reviewable commits, CI on every push.
+A full-stack MERN POS + ERP built by Nexora AI Solutions — part of the
+Google-standard engineering practice program. Every stock change is
+accounted for, attributed, and auditable.
 
 ## Stack
-MongoDB 8 · Express 5 · React 19 · Node 22
 
-## Modules
-- **Products & Inventory** — catalog, stock levels, low-stock alerts
-- **Sales / POS terminal** — fast cart, checkout, receipts
-- **Accounts & Accountability** — every stock movement and sale is audited,
-  attributed to a user, and reversible via returns
-- **Dashboard & Reports** — revenue, top products, stock valuation
-- **Users & Roles** — admin / manager / cashier with least-privilege access
+- **Server** — Node.js + Express (ESM), Mongoose, MongoDB 8
+  - JWT auth + role-based access (admin / manager / cashier)
+  - Multi-document transactions (single-node replica set) with a
+    capability-detected fallback for plain standalones
+  - Full audit ledger: every stock movement (SALE / RETURN / ADJUST /
+    RECEIVE) recorded with who, what, when, why
+  - Jest + supertest — **28 tests**, green locally and on GitHub CI
+- **Web** — React 19 + Vite, dark enterprise theme
+  - Login, Dashboard, Products, POS terminal (cart → checkout →
+    receipt), Sales history + returns, Stock Ledger, Users admin
+- **CI** — GitHub Actions: boot MongoDB, run all tests on every push
 
-## Repo layout
-```
-server/          Express API + Mongo models + tests
-web/             React frontend (Vite)
-docs/            DESIGN.md, API.md, data model, day-by-day log
-.github/         CI: server tests on every push
-```
+## Run it
 
-## Development
 ```bash
-# server
-cd server && npm i && npm run dev     # :4000
-# web
-cd web && npm i && npm run dev        # :5173
+# 1. MongoDB (must be a single-node replica set for transactions)
+mongod --replSet rs0 --dbpath ./mongodb-data --port 27017 --bind_ip 127.0.0.1
+
+# 2. Server (port 4000)
+cd server && npm install
+MONGO_URL='mongodb://127.0.0.1:27017/nexora-pos?replicaSet=rs0&directConnection=true' \
+JWT_SECRET='change-me' npm run seed   # seed users + demo products
+MONGO_URL='mongodb://127.0.0.1:27017/nexora-pos?replicaSet=rs0&directConnection=true' \
+JWT_SECRET='change-me' npm start
+
+# 3. Web (port 5173)
+cd web && npm install && npm run dev
 ```
 
-## Build log
-See docs/LOG.md — every day documented: what, why, decisions, review notes.
+Login: `admin@nexora.com` / `admin123` (admin), `manager@nexora.com` /
+`manager123` (manager), `cashier@nexora.com` / `cashier123` (cashier).
+
+## Accountability model
+
+- **Sale** — validates stock, decrements atomically, records a
+  `SALE` movement with the sale number and the cashier
+- **Return** — restocks, records a `RETURN` movement, marks the sale
+  returned (no double-returns)
+- **Adjust / Receive** — manual stock changes always hit the ledger
+- **Ledger view (manager+)** — filterable, attributed, immutable history
+
+## Google-standard practice
+
+- DESIGN.md first, tests alongside code, CI green before push
+- Small, reviewable commits; clean ESM; centralized error handling;
+  no secrets in the repo
