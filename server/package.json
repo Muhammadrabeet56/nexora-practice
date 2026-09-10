@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "node --watch src/index.js",
     "start": "node src/index.js",
-    "test": "MONGO_URL=mongodb://127.0.0.1:27017/nexora-pos-test?replicaSet=rs0&directConnection=true JWT_SECRET=test-secret node --experimental-vm-modules node_modules/jest/bin/jest.js --runInBand --forceExit",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --runInBand --forceExit",
     "seed": "node src/seed.js"
   },
   "dependencies": {
